@@ -3,6 +3,7 @@
 	<name>LinkedDataFragments</name>
 	<comment></comment>
 	<projects>
+		<project>rdf-query-engine</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
