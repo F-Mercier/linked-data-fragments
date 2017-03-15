@@ -1,0 +1,25 @@
+	----------Deduced BGPs----------
+
+		 BGP [no1] + 
+			 Deduced LDF_1: subject     http://www.w3.org/1999/02/22-rdf-syntax-ns#type     http://xmlns.com/foaf/0.1/Person
+				 received @[DBpedia 2015]
+			 Deduced LDF_2: INJECTEDsubj(LDF_1)     http://www.w3.org/1999/02/22-rdf-syntax-ns#type     http://xmlns.com/foaf/0.1/Person
+				 received @[DBpedia 2015]
+		 BGP [no2] + 
+			 Deduced LDF_3: http://dbpedia.org/resource/Jesus     http://purl.org/dc/terms/subject     object
+				 received @[DBpedia 2015]
+			 Deduced LDF_4: subject     http://purl.org/dc/terms/subject     INJECTEDobj(LDF_3)
+				 received @[DBpedia 2015]
+			 Deduced LDF_6: INJECTEDsubj(LDF_4)     http://www.w3.org/1999/02/22-rdf-syntax-ns#type     http://xmlns.com/foaf/0.1/Person
+				 received @[DBpedia 2015]
+
+	----------Deduced BGPs----------
+
+	----------Single triple patterns (not participating in any Nested Loop)----------
+
+			  Deduced LDF_1: subject    http://purl.org/dc/terms/subject     object
+				  received @[DBpedia 2015]
+
+	----------Single triple patterns (not participating in any Nested Loop)----------
+
+
