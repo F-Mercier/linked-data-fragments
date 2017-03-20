@@ -4,18 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BGP {
-	int numero;
-	String rawText;
+	private int numero;
 	List<Triple> tripleList = new ArrayList<Triple>();
+	
+	public BGP(int n) {
+		setNumero(n);
+	}
 	
 	public BGP(int n, String s, String p, String o) {
 		setNumero(n);
-		tripleList.add(new Triple(s, p, o));
+		tripleList.add(new Triple(0, s, p, o));
 	}
 	
-	public BGP(int n, String raw) {
-		setNumero(n);
-		rawText = raw;
+	public void addToTripleList(Triple t) {
+		tripleList.add(t);
 	}
 
 	public int getNumero() {
@@ -24,13 +26,5 @@ public class BGP {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	}
-
-	public String getRawText() {
-		return rawText;
-	}
-
-	public void setRawText(String rawText) {
-		this.rawText = rawText;
 	}
 }
