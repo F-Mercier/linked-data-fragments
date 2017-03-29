@@ -1,0 +1,68 @@
+User defined parameters of LIFT: 
+Unknow argument
+------------------------------------- General information---------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
+
+	 Storage DB system: "CouchDB"
+	 Database name: "brad1"
+	 Input type trace: "webinspector"
+	 Window gap, defining maximum joinable temporal distance (for subqueries and triple patterns): 3600 seconds
+
+-----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------
+
+[START] ---> LIFT deduction
+
+	----------Candidate Triple Pattern(CTP) set----------
+
+		 CTP no [1]: "subject http://www.w3.org/2000/01/rdf-schema#label "Brad Pitt"@en
+		 CTP no [2]: "subject http://www.w3.org/2000/01/rdf-schema#label object
+		 CTP no [3]: "subject http://dbpedia.org/ontology/starring object
+		 CTP no [4]: "subject http://dbpedia.org/ontology/director object
+		 CTP no [5]: "subject http://dbpedia.org/ontology/starring POSSIBLY_INJECTED
+		 CTP no [6]: "POSSIBLY_INJECTED http://www.w3.org/2000/01/rdf-schema#label object
+		 CTP no [7]: "POSSIBLY_INJECTED http://dbpedia.org/ontology/director object
+
+	----------Candidate Triple Pattern(CTP) set----------
+
+
+				###################### (Elapsed time; 0.256718644 seconds) ###################### 
+
+current DTPs: {1=[subject, http://www.w3.org/2000/01/rdf-schema#label, "Brad Pitt"@en], 2=[subject, http://dbpedia.org/ontology/starring, INJECTEDsubj(LDF_1)], 3=[subject, http://www.w3.org/2000/01/rdf-schema#label, object], 4=[subject, http://dbpedia.org/ontology/starring, object], 5=[subject, http://dbpedia.org/ontology/director, object], 6=[INJECTEDsubj(LDF_2), http://www.w3.org/2000/01/rdf-schema#label, object], 7=[INJECTEDsubj(LDF_2), http://dbpedia.org/ontology/director, object], 8=[INJECTEDobj(LDF_7), http://www.w3.org/2000/01/rdf-schema#label, object]}
+							 Deduced Graph No 1
+							 [ 1, 2, 6, 7, 8 ]
+							 Deduced Graph No 2
+							 [ 3 ]
+							 Deduced Graph No 3
+							 [ 4 ]
+							 Deduced Graph No 4
+							 [ 5 ]
+
+	----------Deduced BGPs----------
+
+		 BGP [no1]
+			 Deduced LDF_1: subject     http://www.w3.org/2000/01/rdf-schema#label     "Brad Pitt"@en
+				 received @[DBpedia 2015]
+			 Deduced LDF_2: subject     http://dbpedia.org/ontology/starring     INJECTEDsubj(LDF_1)
+				 received @[DBpedia 2015]
+			 Deduced LDF_6: INJECTEDsubj(LDF_2)     http://www.w3.org/2000/01/rdf-schema#label     object
+				 received @[DBpedia 2015]
+			 Deduced LDF_7: INJECTEDsubj(LDF_2)     http://dbpedia.org/ontology/director     object
+				 received @[DBpedia 2015]
+			 Deduced LDF_8: INJECTEDobj(LDF_7)     http://www.w3.org/2000/01/rdf-schema#label     object
+				 received @[DBpedia 2015]
+
+	----------Deduced BGPs----------
+
+	----------Single triple patterns (not participating in any Nested Loop)----------
+
+			  Deduced LDF_1: subject    http://www.w3.org/2000/01/rdf-schema#label     object
+				  received @[DBpedia 2015]
+			  Deduced LDF_2: subject    http://dbpedia.org/ontology/starring     object
+				  received @[DBpedia 2015]
+			  Deduced LDF_3: subject    http://dbpedia.org/ontology/director     object
+				  received @[DBpedia 2015]
+
+	----------Single triple patterns (not participating in any Nested Loop)----------
+
+[FINISH] ---> LIFT deduction (Elapsed time global: 0 seconds)

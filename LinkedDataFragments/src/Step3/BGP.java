@@ -6,7 +6,7 @@ import java.util.List;
 public class BGP {
 	private int numero;
 	List<Triple> tripleList = new ArrayList<Triple>();
-	
+
 	public BGP(int n) {
 		setNumero(n);
 	}
