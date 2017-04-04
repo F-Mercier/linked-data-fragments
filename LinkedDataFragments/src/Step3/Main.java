@@ -1,10 +1,15 @@
 package Step3;
 
-import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 public class Main {
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) throws IOException{
 		FileParser fp = new FileParser("brad1.txt");
+	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+	    		new FileOutputStream("bradres.txt"), "utf-8"));
 		
 		if (fp.bgpList.isEmpty()) System.out.println("Aucun BGP à afficher");
 		else {
@@ -12,10 +17,14 @@ public class Main {
 				//System.out.println("=== BGP : " + bgp.getNumero() + " ===");
 				for (Triple t : bgp.tripleList) {
 					//System.out.println("--- Triple : " + t.getNumero() + " ---");
-					System.out.println(t.getSubject() + " " + t.getPredicate() + " " + t.getObject() + " .");
+					String triple = t.getSubject() + " " + t.getPredicate() + " " + t.getObject() + " .";
+					System.out.println(triple);
+					bw.write(triple);
+					bw.newLine();
 				}
 				//System.out.println("");
 			}
 		}
+		bw.close();
 	}
 }
