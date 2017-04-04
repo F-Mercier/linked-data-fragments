@@ -46,7 +46,8 @@ public class Triple {
 	}
 	
 	/**
-	 * @brief replaces the subject with "?subject" plus the identifier of the LDF
+	 * 
+	 * @brief replaces the subject with "_:subject" plus the identifier of the LDF or with "_:object" if it's an injected object
 	 */
 	public void convertSubject() {
 		if (this.subject.equals("subject")) {
@@ -55,12 +56,12 @@ public class Triple {
 		if (this.subject.contains("INJECTEDsubj(LDF_")) {
 			int start = this.subject.indexOf("_");
 			int finish = this.subject.indexOf(")");
-			setSubject("?subject" + this.subject.substring(start + 1, finish));
+			setSubject("_:subject" + this.subject.substring(start + 1, finish));
 		} else {
 			if (this.subject.contains("INJECTEDobj(LDF_")) {
 				int start = this.subject.indexOf("_");
 				int finish = this.subject.indexOf(")");
-				setSubject("?object" + this.subject.substring(start + 1, finish));
+				setSubject("_:object" + this.subject.substring(start + 1, finish));
 			}
 			else {
 				setSubject("<" + getSubject() + ">");
@@ -69,7 +70,8 @@ public class Triple {
 	}
 	
 	/**
-	 * @brief replaces the object with "?object" plus the identifier of the LDF
+	 * 
+	 * @brief replaces the object with "_:object" plus the identifier of the LDF or with "_:subject" if it's an injected subject
 	 */
 	public void convertObject() {
 		if (this.object.equals("object")) {
@@ -78,13 +80,13 @@ public class Triple {
 		if (this.object.contains("INJECTEDobj(LDF_")) {
 			int start = this.object.indexOf("_");
 			int finish = this.object.indexOf(")");
-			setObject("?object" + this.object.substring(start + 1, finish));
+			setObject("_:object" + this.object.substring(start + 1, finish));
 		}
 		else {
 			if (this.object.contains("INJECTEDsubj(LDF_")) {
 				int start = this.object.indexOf("_");
 				int finish = this.object.indexOf(")");
-				setObject("?subject" + this.object.substring(start + 1, finish));
+				setObject("_:subject" + this.object.substring(start + 1, finish));
 			}
 			else {
 				if (!this.object.contains("\"")) {
@@ -93,7 +95,10 @@ public class Triple {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * @brief convert the URI predicate to a NT format
+	 */
 	public void convertPredicate() {
 		setPredicate("<" + getPredicate() + ">");
 	}
