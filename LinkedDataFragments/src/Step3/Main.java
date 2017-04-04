@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 
 public class Main {
 	public static void main(String[] args) throws IOException{
-		Prefix p = new Prefix("prefix");
+		Prefix p = new Prefix();
 		FileParser fp = new FileParser("brad1.txt");
 	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
 	    		new FileOutputStream("bradres.txt"), "utf-8"));
