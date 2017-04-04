@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Prefix {
-	public HashMap<String, String> prefixMap = new HashMap<>();
+	public static HashMap<String, String> prefixMap = new HashMap<>();
 	
-	public Prefix(String filePath) throws FileNotFoundException {
-		File file = new File(filePath);
+	public Prefix() throws FileNotFoundException {
+		File file = new File("prefix");
 		Scanner input = new Scanner(file);
 		while(input.hasNext()) {	
 			String nextLine = input.nextLine();
@@ -18,11 +18,20 @@ public class Prefix {
 			String parts[] = nextLine.split("\t");  
 			
 			clePrefix = parts[0];
-			//System.out.println(clePrefix);
 			etendu = parts[1];
-			//System.out.println(etendu);
 			prefixMap.put(clePrefix, etendu);
+			
 		}
 		input.close();
+	}
+	
+	public static void getAllPrefix(){
+		for(String c: prefixMap.keySet()){
+			System.out.println("cle : " + c + " ; etendu : " + prefixMap.get(c));
+		}
+	}
+	
+	public static String getPrefix(String cle){
+		return prefixMap.get(cle); 
 	}
 }
