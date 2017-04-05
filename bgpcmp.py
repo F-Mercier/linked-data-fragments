@@ -6,11 +6,11 @@ def dump_nt_sorted(g):
         if l: print(l.decode('ascii'))
 
 query1 = Graph().parse(format='nt', data='''
-    _:subject1 <http://www.w3.org/2000/01/rdf-schema#label> "Brad Pitt"@en .
-    _:subject2 <http://dbpedia.org/ontology/starring> _:subject1 .
-    _:subject2 <http://www.w3.org/2000/01/rdf-schema#label> _:object6 .
-    _:subject2 <http://dbpedia.org/ontology/director> _:object7 .
-    _:object7 <http://www.w3.org/2000/01/rdf-schema#label> _:object8 .
+    _:actor <http://www.w3.org/2000/01/rdf-schema#label> "Brad Pitt"@en .
+    _:film <http://dbpedia.org/ontology/starring> _:actor .
+    _:film <http://www.w3.org/2000/01/rdf-schema#label> _:title .
+    _:film <http://dbpedia.org/ontology/director> _:director .
+    _:director <http://www.w3.org/2000/01/rdf-schema#label> _:name .
 ''')
 
 liftres = open("bradres.txt", "r")
@@ -19,6 +19,10 @@ query2 = Graph().parse(format='nt', data=liftres.read())
 graph1 = to_isomorphic(query1)
 
 graph2 = to_isomorphic(query2)
+
+dump_nt_sorted(graph1)
+
+dump_nt_sorted(graph2)
 
 if (graph1 == graph2): print("Isomorphic")
 
