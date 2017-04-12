@@ -5,27 +5,34 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import jdk.management.resource.internal.TotalResourceContext;
+
 public class Main {
 	public static void main(String[] args) throws IOException{
-		Prefix p = new Prefix();
 		FileParser fp = new FileParser("brad1.txt");
-	    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-	    		new FileOutputStream("bradres.txt"), "utf-8"));
 		
 		if (fp.bgpList.isEmpty()) System.out.println("Aucun BGP à afficher");
 		else {
 			for (BGP bgp : fp.bgpList) {
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+			    	new FileOutputStream("brad" + bgp.getNumero() + "res.txt"), "utf-8"));
+				String graph = "";
 				//System.out.println("=== BGP : " + bgp.getNumero() + " ===");
 				for (Triple t : bgp.tripleList) {
 					//System.out.println("--- Triple : " + t.getNumero() + " ---");
 					String triple = t.getSubject() + " " + t.getPredicate() + " " + t.getObject() + " .";
 					System.out.println(triple);
-					bw.write(triple);
-					bw.newLine();
+					graph = graph + triple + "\n";
 				}
 				//System.out.println("");
+				graph = toRequest(graph);
+				bw.write(graph);
+				bw.close();
 			}
 		}
-		bw.close();
+	}
+	
+	public static String toRequest(String graph) {
+		return "Select * Where {\n" + graph + "}";
 	}
 }

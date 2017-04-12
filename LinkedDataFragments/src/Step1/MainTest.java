@@ -19,6 +19,7 @@ public class MainTest {
 
 	
 	public static void main(String[] args) throws IOException, ParseException, ScriptException {
+		Prefix p = new Prefix();
 		//ParserLog pars = new ParserLog("access.log-20151103");
 		//ParserLog pars = new ParserLog("requestLogEx.log");
 		
