@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import jdk.management.resource.internal.TotalResourceContext;
-
 public class Main {
 	public static void main(String[] args) throws IOException{
 		FileParser fp = new FileParser("brad1.txt");
