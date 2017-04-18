@@ -50,7 +50,7 @@ public class Triple {
 	 * @brief replaces the subject with "?subject" plus the identifier of the LDF or with "?object" if it's an injected object
 	 */
 	public void convertSubject() {
-		if (this.subject.equals("subject")) {
+		if (this.subject.equals("?s")) {
 			setSubject("INJECTEDsubj(LDF_" + numero + ")");
 		}
 		if (this.subject.contains("INJECTEDsubj(LDF_")) {
@@ -64,7 +64,9 @@ public class Triple {
 				setSubject("?object" + this.subject.substring(start + 1, finish));
 			}
 			else {
-				setSubject("<" + getSubject() + ">");
+				if (this.subject.contains("//")) {
+					setSubject("<" + getSubject() + ">");
+				}
 			}
 		}
 	}
@@ -74,7 +76,7 @@ public class Triple {
 	 * @brief replaces the object with "?object" plus the identifier of the LDF or with "?subject" if it's an injected subject
 	 */
 	public void convertObject() {
-		if (this.object.equals("object")) {
+		if (this.object.equals("?o")) {
 			setObject("INJECTEDobj(LDF_" + numero + ")");
 		}
 		if (this.object.contains("INJECTEDobj(LDF_")) {
@@ -89,7 +91,7 @@ public class Triple {
 				setObject("?subject" + this.object.substring(start + 1, finish));
 			}
 			else {
-				if (!this.object.contains("\"")) {
+				if (this.object.contains("//")) {
 					setObject("<" + getObject() + ">");
 				}
 			}
@@ -100,6 +102,11 @@ public class Triple {
 	 * @brief convert the URI predicate to a NT format
 	 */
 	public void convertPredicate() {
-		setPredicate("<" + getPredicate() + ">");
+		if (this.predicate.equals("?p")) {
+			setPredicate("?predicate" + numero);
+		}
+		else {
+			setPredicate("<" + getPredicate() + ">");
+		}
 	}
 }

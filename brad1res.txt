@@ -1,7 +1,0 @@
-Select * Where {
-?subject1 <http://www.w3.org/2000/01/rdf-schema#label> "Brad Pitt"@en .
-?subject2 <http://dbpedia.org/ontology/starring> ?subject1 .
-?subject2 <http://www.w3.org/2000/01/rdf-schema#label> ?object6 .
-?subject2 <http://dbpedia.org/ontology/director> ?object7 .
-?object7 <http://www.w3.org/2000/01/rdf-schema#label> ?object8 .
-}

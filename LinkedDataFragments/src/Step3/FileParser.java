@@ -18,8 +18,8 @@ public class FileParser {
 	 * @throws FileNotFoundException if the path does not lead to a file
 	 * @brief reads the whole file, adds all the BGPs to its list and adds all the triples to the related BGP
 	 */
-	public FileParser(String filePath) throws FileNotFoundException {
-		File file = new File(filePath);
+	public FileParser(File f) throws FileNotFoundException {
+		File file = f;
 		Scanner input = new Scanner(file);
 		
 		while(input.hasNext()) {
@@ -29,12 +29,12 @@ public class FileParser {
 		    	reachedBGPs = !reachedBGPs;
 		    }
 		    if (reachedBGPs) {
-		    	if (nextLine.contains("BGP [no")) {
+		    	if (nextLine.contains("BGP ")) {
 		    		tempBGP = new BGP(findBgp(nextLine));
 		    		bgpList.add(tempBGP);
 		    	}
 		    	else {
-		    		if (nextLine.contains("Deduced LDF_")) {
+		    		if ((nextLine.contains("Deduced LDF_") && (isCompleteTriple(nextLine)))) {
 		    			tempTriple = new Triple(0, "", "", "");
 		    			tempTriple.setNumero(findTriple(nextLine));
 		    			setTriple(nextLine);
@@ -56,10 +56,19 @@ public class FileParser {
 	 * @brief selects the number between "o" and "]" and returns it
 	 */
 	public int findBgp(String bgp) {
-		int nBGP;
-		int start = bgp.indexOf("o");
-		int finish = bgp.indexOf("]", start);
-		nBGP = Integer.parseInt(bgp.substring(start + 1, finish));
+		int nBGP, start, finish;
+		if (bgp.contains("[")) {
+			start = bgp.indexOf("o");
+			finish = bgp.indexOf("]", start);
+			nBGP = Integer.parseInt(bgp.substring(start + 1, finish));
+		}
+		else {
+			start = bgp.indexOf("BGP ");
+			finish = bgp.length();
+			String tempNum = bgp.substring(start + 4, finish);
+			tempNum = tempNum.replaceAll("\\s", "");
+			nBGP = Integer.parseInt(tempNum);
+		}
 		return nBGP;
 	}
 	
@@ -84,15 +93,25 @@ public class FileParser {
 	 */
 	public void setTriple(String ldf) {
 		int start = ldf.indexOf(": ");
-		int finish = ldf.indexOf("     ", start + 1);
+		int finish = ldf.indexOf(" ", start + 2);
 		tempTriple.setSubject(ldf.substring(start + 2, finish));
 		
 		start = finish;
-		finish = ldf.indexOf("     ", start + 1);
-		tempTriple.setPredicate(ldf.substring(start + 5, finish));
+		finish = ldf.indexOf(" ", start + 1);
+		tempTriple.setPredicate(ldf.substring(start + 1, finish));
 		
 		start = finish;
 		finish = ldf.length();
-		tempTriple.setObject(ldf.substring(start + 5, finish));
+		tempTriple.setObject(ldf.substring(start + 1, finish));
+	}
+	
+	public boolean isCompleteTriple(String line) {
+		int nb = 0;
+		
+		for (int i=0; i < line.length(); i++) {
+			if (line.charAt(i) == ' ') nb++;
+		}
+		
+		return (nb == 4);
 	}
 }

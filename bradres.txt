@@ -1,5 +1,0 @@
-_:subject1 <http://www.w3.org/2000/01/rdf-schema#label> "Brad Pitt"@en .
-_:subject2 <http://dbpedia.org/ontology/starring> _:subject1 .
-_:subject2 <http://www.w3.org/2000/01/rdf-schema#label> _:object6 .
-_:subject2 <http://dbpedia.org/ontology/director> _:object7 .
-_:object7 <http://www.w3.org/2000/01/rdf-schema#label> _:object8 .
