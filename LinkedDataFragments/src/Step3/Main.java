@@ -6,6 +6,8 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 
 public class Main {
+	static int nbEntry = 0;
+	
 	public static void main(String[] args){
 		try {
 			File repertory = new File(args[0]);
@@ -23,6 +25,8 @@ public class Main {
 			System.out.print("Closing BufferedWriter...");
 			bw.close();
 			System.out.println("OK");
+			System.out.println("Files analyzed : " + files.length);
+			System.out.println("Entries : " + nbEntry);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -36,7 +40,7 @@ public class Main {
 			String log = "";
 			for (BGP bgp : fp.bgpList) {
 				log = log + tab + "<entry>\n";
-				
+				nbEntry++;
 				String graph = "";
 				for (Triple t : bgp.tripleList) {
 					String triple = t.getSubject() + " " + t.getPredicate() + " " + t.getObject() + " . ";

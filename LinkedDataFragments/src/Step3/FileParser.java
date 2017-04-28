@@ -66,7 +66,7 @@ public class FileParser {
 			start = bgp.indexOf("BGP ");
 			finish = bgp.length();
 			String tempNum = bgp.substring(start + 4, finish);
-			tempNum = tempNum.replaceAll("\\s", "");
+			tempNum = tempNum.replaceAll("\\s|\\D+", "");
 			nBGP = Integer.parseInt(tempNum);
 		}
 		return nBGP;
